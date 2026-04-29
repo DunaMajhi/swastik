@@ -42,23 +42,15 @@ io.on('connection', (socket) => {
   });
 });
 
-// Middleware
-app.use(helmet({ crossOriginResourcePolicy: false }));
-const allowedOrigins = [
-  'http://localhost:5173',
-  process.env.CLIENT_URL
-].filter(Boolean);
+// Middleware - CORS must come before helmet
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(null, true); // Allow all origins in case of mismatch
-    }
-  },
-  credentials: true
+  origin: true, // Allow all origins
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.options('*', cors()); // Handle preflight for all routes
+app.use(helmet({ crossOriginResourcePolicy: false, crossOriginOpenerPolicy: false }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
