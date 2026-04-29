@@ -49,7 +49,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.options('*', cors()); // Handle preflight for all routes
 app.use(helmet({ crossOriginResourcePolicy: false, crossOriginOpenerPolicy: false }));
 app.use(morgan('dev'));
 app.use(express.json());
