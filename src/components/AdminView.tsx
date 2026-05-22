@@ -35,7 +35,7 @@ export default function AdminView() {
             <ShoppingCart className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500">Today's Orders</p>
+            <p className="text-sm font-medium text-gray-500">Today&apos;s Orders</p>
             <p className="text-2xl font-bold text-gray-900">{todaysOrdersCount}</p>
           </div>
         </div>
